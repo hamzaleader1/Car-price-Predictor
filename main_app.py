@@ -57,6 +57,8 @@ st.sidebar.title("Navigation bar")
 user_choice=st.sidebar.radio("Go to",tuple(pages_dict.keys()))
 if user_choice == "Home":
 	Home.app()
+elif user_choice == "View Data":
+	Data.app(df)
 else:
 	selected_page=pages_dict[user_choice]
 	selected_page.app(df)
