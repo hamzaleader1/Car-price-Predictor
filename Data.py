@@ -1,20 +1,34 @@
+# Code for 'data.py' file
+# Import necessary modules
+import numpy as np
+import pandas as pd
 import streamlit as st
-def app(df):
-	st.header("This page shows the raw data used for prediction")
-	with st.beta_expander("View data set"):
-		st.table(df)
-	st.subheader("Column description")
-	if st.checkbox("Summary"):
-		st.table(df.describe())
-	col_1,col_2,col_3=st.beta_columns(3)
-	with col_1:
-		if st.checkbox("Show column names"):
-			st.table(df.columns)
-	with col_2:
-		if st.checkbox("View data dimensions"):
-			st.write("rows",df.shape[0])
-			st.write("columns",df.shape[1])
-	with col_3:
-		if st.checkbox("View column data"):
-			selection=st.selectbox("Select a column",tuple(df.columns))
-			st.write(df[selection])
+
+# Define a function 'app()' which accepts 'car_df' as an input.
+def app(car_df):
+    st.header("View Data")
+    # Add an expander and display the dataset as a static table within the expander.
+    with st.beta_expander("View Dataset"):
+        st.table(car_df)
+
+    st.subheader("Columns Description:")
+    if st.checkbox("Show summary"):
+        st.table(car_df.describe())
+
+    beta_col1, beta_col2, beta_col3 = st.beta_columns(3)
+
+    # Add a checkbox in the first column. Display the column names of 'car_df' on the click of checkbox.
+    with beta_col1:
+        if st.checkbox("Show all column names"):
+            st.table(list(car_df.columns))
+
+    # Add a checkbox in the second column. Display the column data-types of 'car_df' on the click of checkbox.
+    with beta_col2:
+        if st.checkbox("View column data-type"):
+            st.table(car_df.dtypes)
+
+    # Add a checkbox in the third column followed by a selectbox which accepts the column name whose data needs to be displayed.
+    with beta_col3:
+        if st.checkbox("View column data"):
+            column_data = st.selectbox('Select column', tuple(car_df.columns))
+            st.write(car_df[column_data])
