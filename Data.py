@@ -2,7 +2,7 @@ import streamlit as st
 def app(df):
 	st.header("This page shows the raw data used for prediction")
 	with st.beta_expander("View data set"):
-		st.dataframe(df)
+		st.table(df)
 	st.subheader("Column description")
 	if st.checkbox("Summary"):
 		st.table(df.describe())
